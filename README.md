@@ -1,2 +1,2 @@
 # myflaskblog
-Simple Blog base on Flask
+基于Flask框架的简单Blog网站

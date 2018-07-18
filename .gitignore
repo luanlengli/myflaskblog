@@ -1,0 +1,9 @@
+.idea/
+*.pyc
+secret.py
+.git
+.idea
+*.log
+*.txt
+.idea/vcs.xml
+.idea/vcs.xml

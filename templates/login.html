@@ -1,0 +1,18 @@
+{% extends 'includes/base.html' %}
+
+{% block body %}
+<div class="container">
+    {% include 'includes/messages.html' %}
+    <form method=post>
+        <div class="form-group">
+            <label>用户名</label>
+            <input type="text" name="username" class="form-control" value="">
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" name="password" class="form-control" value="">
+        </div>
+        <button type="submit" class="btn btn-primary">登录</button>
+    </form>
+</div>
+{% endblock %}

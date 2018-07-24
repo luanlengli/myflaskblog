@@ -1,9 +1,16 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">我的Flask博客</h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="#">主页</a>
-        <a class="p-2 text-dark" href="#">博客</a>
+        <a class="p-2 text-dark" href="/">主页</a>
+        <a class="p-2 text-dark" href="/blog">博客</a>
+        <a class="p-2 text-dark" href="/weibo">AJAX微博</a>
+        <a class="p-2 text-dark" href="/webchat">Web聊天室</a>
     </nav>
-    <a class="btn btn-outline-primary" href="#">注册</a>
-    <a class="btn btn-outline-primary" href="#">登录</a>
+    {% if session.login %}
+        <a class="btn btn-outline-primary" href="/dashboard">个人主页</a>
+        <a class="btn btn-outline-primary" href="/logout">注销</a>
+    {% else %}
+        <a class="btn btn-outline-primary" href="/register">注册</a>
+        <a class="btn btn-outline-primary" href="/login">登录</a>
+    {% endif %}
 </div>

@@ -4,9 +4,7 @@
 import hashlib
 from sqlalchemy import (
     Column,
-    Integer,
     String,
-    Text,
 )
 from models.base_model import (
     BaseModel,

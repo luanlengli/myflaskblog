@@ -3,16 +3,20 @@
 {% block body %}
 <div class="container">
     {% include 'includes/messages.html' %}
-    {% from "includes/formhelper.html" import render_field %}
-    <form method=post>
-      <dl>
-        {{ render_field(form.username, class_ = "form-control") }}
-        {{ render_field(form.email, class_ = "form-control") }}
-        {{ render_field(form.password, class_ = "form-control") }}
-        {{ render_field(form.confirm, class_ = "form-control") }}
-      </dl>
-        <p>
-            <input type="submit" class="btn btn-primary" value="注册">
+    <form method="post" action="/register" class="bs-example bs-example-form" role="form">
+        <h3>用户名</h3>
+        <div class="input-group">
+            <input class="form-control" type="text" name="username" placeholder="请输入用户名">
+        </div>
+        <h3>密码</h3>
+        <div class="input-group">
+            <input class="form-control" type="password" name="password" placeholder="请输入密码">
+        </div>
+        <h3>电子邮箱</h3>
+        <div class="input-group">
+            <input class="form-control" type="text" name="email" placeholder="请输入电子邮箱">
+        </div>
+        <input type="submit" class="btn btn-primary" value="注册">
         </p>
     </form>
 </div>

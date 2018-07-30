@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+import functools
 
 from flask import (
     Blueprint,
@@ -11,17 +12,42 @@ from flask import (
     session,
 )
 from uuid import uuid4
-from models.form import RegistrationForm
+
 from models.user import User
 
 main = Blueprint('index', __name__)
 
 
 def current_user():
+    '''
+    判断当前登录用户
+    :return: 用户对象
+    '''
     uid = session.get('uid', '')
     u = User.find_one(id=uid)
     print('Curren_User = <{}>'.format(u.username))
     return u
+
+
+def login_required(func):
+    '''
+    判断用户登录
+    :param func:
+    :return:
+    '''
+
+    @functools.wraps(func)
+    def f(*args, **kwargs):
+        print('login required')
+        login = session.get('login', False)
+        if login is True:
+            print('Logined!')
+            return func(*args, **kwargs)
+        else:
+            print('No login!')
+            return redirect(url_for('index.login'))
+
+    return f
 
 
 @main.route('/')
@@ -32,16 +58,11 @@ def index():
 
 @main.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm(request.form)
-    if request.method == 'POST' and form.validate():
+    form = request.form.to_dict()
+    if request.method == 'POST':
         # print('Register Form = <{}>'.format(form))
-        register_form = dict(
-            username=form.username.data,
-            password=form.password.data,
-            email=form.email.data,
-        )
-        u = User.register(register_form)
-        flash('{}，你已注册成功！'.format(u.username), 'success')
+        u = User.register(form)
+        # flash('{}，你已注册成功！'.format(u.username), 'success')
         return redirect(url_for('.index'))
     return render_template('register.html', form=form)
 
@@ -59,8 +80,7 @@ def login():
             session['username'] = u.username
             session['uid'] = u.id
             session['login'] = True
-
-            flash("{}，你已成功登录！".format(u.username), 'success')
+            # flash("{}，你已成功登录！".format(u.username), 'success')
             return redirect('dashboard')
     return render_template('login.html')
 
@@ -73,6 +93,7 @@ def logout():
 
 
 @main.route('/dashboard')
+@login_required
 def dashboard():
     user = current_user()
     return render_template('dashboard.html', u=user)

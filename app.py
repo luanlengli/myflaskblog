@@ -4,6 +4,7 @@
 from flask import Flask
 
 from routes.route_index import main as index_route
+from routes.route_blog import main as blog_route
 from secret import Config
 from models.base_model import db
 
@@ -11,6 +12,7 @@ from models.base_model import db
 def register_routes(app):
     # 注册路由
     app.register_blueprint(index_route)
+    app.register_blueprint(blog_route)
     return app
 
 

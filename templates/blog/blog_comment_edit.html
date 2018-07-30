@@ -1,0 +1,21 @@
+{% extends 'includes/base.html' %}
+{% block head %}
+    <link href="/static/css/pure-min.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<div class="">
+    <h1>编辑博客评论</h1>
+    <form method="post" action="/blog_comment/update">
+        <div class="form-group">
+            <input class="pure-input-rounded" name="id" value="{{bc.id}}" hidden>
+            <input class="pure-input-rounded" name="blog_id" value="{{bc.blog_id}}" hidden>
+        </div>
+        <h3>评论</h3>
+        <div class="form-group" id="editor">
+            <textarea name="content">{{bc.content}}</textarea>
+        </div>
+        <p><input class="btn btn-primary" type="submit" value="提交修改"></p>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'includes/base.html' %}
+
+{% block body %}
+    <h1>新增博客</h1>
+    {% include 'includes/messages.html' %}
+    <form method="post" action="">
+        <h3>标题</h3>
+        <div class="form-group">
+            <input name="title" >
+        </div>
+        <h3>正文</h3>
+        <div class="form-group">
+            <textarea name="b_content" id="editor"></textarea>
+        </div>
+        <p>
+            <input class="btn btn-primary" type="submit" value="提交">
+        </p>
+    </form>
+{% endblock %}

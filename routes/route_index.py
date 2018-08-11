@@ -11,7 +11,6 @@ from flask import (
     flash,
     session,
 )
-from uuid import uuid4
 
 from models.user import User
 

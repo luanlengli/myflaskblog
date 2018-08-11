@@ -8,8 +8,6 @@ from flask import (
     request,
     url_for,
     redirect,
-    flash,
-    session,
     jsonify,
 )
 
@@ -44,7 +42,7 @@ def weibo_ownner_required(func):
         if weibo.user_id == u.id:
             return func(*args, **kwargs)
         else:
-            return redirect('/weibo/index')
+            return redirect(url_for('.weibo_index'))
 
     return f
 
@@ -71,7 +69,7 @@ def weibo_comment_ownner_required(func):
         if wc.user_id == u.id:
             return func(*args, **kwargs)
         else:
-            return redirect('/weibo/index')
+            return redirect(url_for('.weibo_index'))
 
     return f
 

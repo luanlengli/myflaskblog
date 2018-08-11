@@ -6,7 +6,6 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Text,
     UnicodeText,
 )
 import time

@@ -8,8 +8,6 @@ from flask import (
     request,
     url_for,
     redirect,
-    flash,
-    session,
 )
 
 from routes.route_index import current_user, login_required

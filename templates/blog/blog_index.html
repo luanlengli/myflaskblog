@@ -1,6 +1,6 @@
 {% extends 'includes/base.html' %}
 
-{% block body %}
+{% block content %}
     <h1>博客主页</h1>
     <a class="btn btn-success" href="/blog/add">添加博文</a>
     <hr>
@@ -21,8 +21,8 @@
                 <td><a href="#">{{blog.ownner().username}}</a></td>
                 <td>{{blog.human_read_created_time()}}</td>
                 <td>{{blog.views}}/{{blog.comment_count()}}</td>
-                <td><a href="/blog/edit/{{blog.id}}" class="btn btn-primary pull-right">编辑</a></td>
-                <td><a href="/blog/delete/{{blog.id}}" class="btn btn-danger">删除</a></td>
+                <td><a href="/blog/edit?id={{blog.id}}" class="btn btn-primary pull-right">编辑</a></td>
+                <td><a href="/blog/delete?id={{blog.id}}" class="btn btn-danger">删除</a></td>
             </tr>
         {% endfor %}
     </table>

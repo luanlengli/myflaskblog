@@ -1,0 +1,13 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+    <h1>微博主页</h1>
+    <input name="content" id="id-input-weibo">
+    <br>
+    <a type="" class="btn btn-primary" id="id-button-add">发表新微博</a>
+    <div class="weibo-list">
+    </div>
+{% endblock %}
+{% block afterbody %}
+<script src='/static/js/ajax.js'></script>
+{% endblock %}

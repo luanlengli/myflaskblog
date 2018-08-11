@@ -1,40 +1,66 @@
 {% extends 'includes/base.html' %}
 {% block head %}
-    <script src="/static/js/marked.min.js"></script>
-    <script src="/static/js/prism.js"></script>
-    <script src="/static/js/prism-autoloader.min.js"></script>
+<script src="/static/js/marked.min.js"></script>
+<script src="/static/js/prism.js"></script>
+<script src="/static/js/prism-autoloader.min.js"></script>
+<link href="//cdn.bootcss.com/prism/1.8.0/themes/prism.css" rel="stylesheet">
 {% endblock %}
 
 
-{% block body %}
-    <h3>博客标题：{{blog.title}}</h3>
-    <h3>作者：{{blog.ownner().username}}</h3>
-    <a href="/blog/edit?id={{blog.id}}" class="btn btn-primary">编辑</a>
-    <a href="/blog/delete?id={{blog.id}}" class="btn btn-danger">删除</a>
-    <h3>博客正文</h3>
-    <div class="markdown-text" id="blog-content">
-        {{blog.content}}
+{% block content %}
+<div class="panel">
+    <div class="header topic_header">
+        <span class="topic_full_title">博客标题：{{blog.title}}</span>
     </div>
-    <h3>博客评论</h3>
-    {% for bc in blog_comments %}
-        <span>评论{{bc.id}}</span>
-        <div class="markdown-text" id="blog-comment-content-{{bc.id}}">
-            {{bc.content}}
+    <div class="changes">
+        <span>{{blog.created_time}}</span>
+        <span>{{blog.ownner().username}}</span>
+        <span>{{blog.views}}</span>
+        <a href="/blog/edit?id={{blog.id}}">编辑</a>
+        <a href="/blog/delete?id={{blog.id}}">删除</a>
+    </div>
+    <div class="inner topic">
+        <div class="topic_content">
+            <div class="markdown-text">
+                <p>{{blog.content}}</p>
+            </div>
         </div>
-        <a href="/blog_comment/edit?id={{bc.id}}" class="btn btn-primary">编辑</a>
-        <a href="/blog_comment/delete?id={{bc.id}}" class="btn btn-danger">删除</a>
-        <br>
+    </div>
+</div>
+<div class="panel">
+    <div class="header">
+        <span class="col_fade">{{blog.comment_count()}} 回复</span>
+    </div>
+    {% for comment in blog_comments %}
+    <div class="cell reply_area reply_item">
+        <div class="author_content">
+            <a class="user_avatar" href="/user/{{comment.ownner().username}}"><img src="{{comment.ownner().image}}"></a>
+            <div class="user_info">
+                <a class="dark reply_author"
+                   href="/user/{{comment.ownner().username}}">{{comment.ownner().username}}</a>
+                <a class="reply_time">{{comment.created_time}}</a>
+                <a href="/blog_comment/edit?id={{comment.id}}">编辑</a>
+                <a href="/blog_comment/delete?id={{comment.id}}">删除</a>
+            </div>
+        </div>
+        <div class="markdown-text">
+            <p>{{comment.content}}</p>
+        </div>
+    </div>
     {% endfor %}
-    <h3>添加评论</h3>
-    <form method="post" action="/blog_comment/add">
-        <input class="pure-form pure-form-aligned" name="blog_id" value="{{blog.id}}" hidden>
-        <div class="form-group">
-            <textarea name="content"></textarea>
-        </div>
-        <p>
-            <input class="btn btn-primary" type="submit" value="提交">
-        </p>
-    </form>
+</div>
+<div class="panel">
+    <div class="header">
+        <span class="col_fade">添加评论</span>
+    </div>
+    <div class="inner reply">
+        <form id="reply_form" action="/blog_comment/add" method="post">
+            <input name="blog_id" value="{{blog.id}}" hidden>
+            <textarea class="form-control col-xs-12" name="content" rows="8" style="min-width: 100%"></textarea>
+            <input class="span-primary submit_btn" type="submit" value="提交评论">
+        </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block afterbody %}
@@ -73,5 +99,6 @@
     }
 
     __main()
+
 </script>
 {% endblock %}

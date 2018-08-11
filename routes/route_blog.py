@@ -82,7 +82,7 @@ def blog_index():
 
 @main.route('/blog/detail/<int:id>')
 def blog_detail(id):
-    blog = Blog.find_one(id=id)
+    blog = Blog.view(id=id)
     blog_comments = blog.comments()
     return render_template('blog/blog_detail.html', blog=blog, blog_comments=blog_comments)
 

@@ -2,7 +2,7 @@
 {% block head %}
     <link href="/static/css/pure-min.css" rel="stylesheet">
 {% endblock %}
-{% block body %}
+{% block content %}
 <div class="">
     <h1>编辑博文</h1>
     <form method="post" action="/blog/update">
@@ -14,7 +14,7 @@
             <input class="pure-input-rounded" name="title" value="{{blog.title}}">
         </div>
         <h3>正文</h3>
-        <div class="form-group" id="editor">
+        <div class="form-group" id="editor" rows="30">
             <textarea name="content">{{blog.content}}</textarea>
         </div>
         <p><input class="btn btn-primary" type="submit" value="提交修改"></p>

@@ -6,3 +6,4 @@ secret.py
 *.log
 *.txt
 .idea/vcs.xml
+__pycache__

@@ -19,7 +19,6 @@ def register_routes(app):
     app.register_blueprint(weibo_route)
     app.register_blueprint(webchat_route)
 
-    socketio.init_app(app)
     return app
 
 
@@ -30,15 +29,13 @@ def configured_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.db_uri
     app.debug = True
     db.init_app(app)
+    socketio.init_app(app)
     app = register_routes(app)
     return app
 
-
 if __name__ == '__main__':
     app = configured_app()
-    config = dict(
-        debug=True,
-        host='0.0.0.0',
-        port=80,
-    )
-    socketio.run(app, host='0.0.0.0', port=80)
+    socketio.run(app,
+                 host='127.0.0.1',
+                 port=2000,
+                 )

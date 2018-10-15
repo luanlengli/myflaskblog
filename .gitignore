@@ -4,6 +4,5 @@ secret.py
 .git
 .idea
 *.log
-*.txt
 .idea/vcs.xml
 __pycache__
